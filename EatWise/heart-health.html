@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart Health Preferences - EatWise</title>
+  <link rel="stylesheet" href="styles3.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <img src="imgs/Vegan.png" alt="Healthy Food">
+      <p>Your Personalized Food Health Advisor</p>
+    </nav>
+  </header>
+
+  <section id="conditions-section">
+    <div class="condition-container">
+      <form id="heart-health-form">
+
+        <h2>Essential Heart Health Choices</h2>
+        <div class="condition">
+          <label for="low-sodium">Prefer Low-Sodium Alternatives (e.g., Fresh Produce, Herbal Seasonings)</label>
+          <input type="checkbox" id="low-sodium" name="low-sodium">
+        </div>
+        <div class="condition">
+          <label for="healthy-fats">Include Healthy Fats (e.g., Avocados, Nuts, Olive Oil)</label>
+          <input type="checkbox" id="healthy-fats" name="healthy-fats">
+        </div>
+        <div class="condition">
+          <label for="omega-3">Increase Omega-3 Fatty Acids (e.g., Salmon, Chia Seeds, Flaxseeds)</label>
+          <input type="checkbox" id="omega-3" name="omega-3">
+        </div>
+        <div class="condition">
+          <label for="trans-fat">Avoid Trans Fats (e.g., Processed Foods, Fried Snacks)</label>
+          <input type="checkbox" id="trans-fat" name="trans-fat">
+        </div>
+
+        <h2>Additional Heart-Healthy Preferences</h2>
+        <div class="condition">
+          <label for="fiber">Increase Fiber Intake (e.g., Oats, Legumes, Berries)</label>
+          <input type="checkbox" id="fiber" name="fiber">
+        </div>
+        <div class="condition">
+          <label for="antioxidants">Increase Antioxidant-Rich Foods (e.g., Berries, Dark Chocolate)</label>
+          <input type="checkbox" id="antioxidants" name="antioxidants">
+        </div>
+
+        <button type="submit" class="responsive-button">Proceed</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EatWise. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("heart-health-form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent page reload
+
+        let selectedHeartHealth = [];
+        document.querySelectorAll("#heart-health-form input[type='checkbox']:checked").forEach((checkbox) => {
+            selectedHeartHealth.push(checkbox.name);
+        });
+
+        // Save selected options to localStorage
+        localStorage.setItem("heartHealth", JSON.stringify(selectedHeartHealth));
+
+        // Redirect to next page
+        window.location.href = "nutrition.html";
+    });
+  </script>
+</body>
+
+</html>

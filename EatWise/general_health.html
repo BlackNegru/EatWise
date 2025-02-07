@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>General Health Concerns - EatWise</title>
+  <link rel="stylesheet" href="styles3.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="imgs/Vegan.png" alt="Healthy Food">
+            <p>Your Personalized Food Health Advisor</p>
+        </nav>
+    </header>
+  
+  <section id="conditions-section">
+    <div class="condition-container">
+      <form id="general-health-form">
+        <h2>Chronic Conditions</h2>
+        <div class="condition">
+          <label for="diabetes">Diabetes (Blood Sugar Control)</label>
+          <input type="checkbox" id="diabetes" name="diabetes">
+        </div>
+        <div class="condition">
+          <label for="bp">High Blood Pressure (Hypertension)</label>
+          <input type="checkbox" id="bp" name="bp">
+        </div>
+        <div class="condition">
+          <label for="cholesterol">High Cholesterol</label>
+          <input type="checkbox" id="cholesterol" name="cholesterol">
+        </div>
+
+        <h2>Weight & Digestion</h2>
+        <div class="condition">
+          <label for="weight">Weight Management</label>
+          <input type="checkbox" id="weight" name="weight">
+        </div>
+        <div class="condition">
+          <label for="digestive">Digestive Issues (Bloating, IBS, etc.)</label>
+          <input type="checkbox" id="digestive" name="digestive">
+        </div>
+
+        <button type="submit" class="responsive-button">Proceed</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EatWise. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("general-health-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent page reload
+
+        let selectedConditions = [];
+        document.querySelectorAll("#general-health-form input[type='checkbox']:checked").forEach((checkbox) => {
+            selectedConditions.push(checkbox.name);
+        });
+
+        localStorage.setItem("generalHealthConditions", JSON.stringify(selectedConditions));
+
+        // Redirect to next page
+        window.location.href = "food-sensitivities.html";
+    });
+  </script>
+
+</body>
+</html>

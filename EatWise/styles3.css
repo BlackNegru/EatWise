@@ -1,0 +1,92 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  header {
+    background-color: #047708;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  header nav h1 {
+    font-size: 2.5rem;
+  }
+  
+  header nav p {
+    font-size: 1.2rem;
+  }
+  
+  #conditions-section {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .condition-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .condition {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .condition label {
+    font-size: 1.1rem;
+    color: #444;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #047708;
+  }
+  
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+  
+  @media (max-width: 600px) {
+    .condition-container {
+      padding: 1.5rem;
+    }
+  }
+  

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Environmental Preferences - EatWise</title>
+  <link rel="stylesheet" href="styles3.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <img src="imgs/Vegan.png" alt="Eco-Friendly Image">
+      <p>Your Personalized Environmental Impact Advisor</p>
+    </nav>
+  </header>
+
+  <section id="conditions-section">
+    <div class="condition-container">
+      <form id="environmental-preferences-form">
+
+        <h2>Choose Your Environmental Preferences</h2>
+        <div class="condition">
+          <label for="vegan">Prefer a Vegan Diet (e.g., No Animal Products)</label>
+          <input type="checkbox" id="vegan" name="vegan">
+        </div>
+        <div class="condition">
+          <label for="local-foods">Prefer Locally Sourced Foods</label>
+          <input type="checkbox" id="local-foods" name="local-foods">
+        </div>
+        <div class="condition">
+          <label for="zero-waste">Prefer Zero-Waste Lifestyle (e.g., Minimal Packaging)</label>
+          <input type="checkbox" id="zero-waste" name="zero-waste">
+        </div>
+        <div class="condition">
+          <label for="recyclable">Choose Recyclable Packaging</label>
+          <input type="checkbox" id="recyclable" name="recyclable">
+        </div>
+
+        <h2>Optimize Your Environmental Impact</h2>
+        <div class="condition">
+          <label for="low-carbon">Reduce Carbon Footprint (e.g., Low-Carbon Foods)</label>
+          <input type="checkbox" id="low-carbon" name="low-carbon">
+        </div>
+        <div class="condition">
+          <label for="plant-based">Prefer Plant-Based Foods to Reduce Environmental Impact</label>
+          <input type="checkbox" id="plant-based" name="plant-based">
+        </div>
+        <div class="condition">
+          <label for="organic">Prefer Organic Foods to Support Sustainable Agriculture</label>
+          <input type="checkbox" id="organic" name="organic">
+        </div>
+        <div class="condition">
+          <label for="eco-friendly">Support Eco-Friendly Brands (e.g., Companies with Green Practices)</label>
+          <input type="checkbox" id="eco-friendly" name="eco-friendly">
+        </div>
+
+        <button type="submit" class="responsive-button">Proceed</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EatWise. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("environmental-preferences-form").addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent page reload
+
+      let selectedEnvironmentalPreferences = [];
+      document.querySelectorAll("#environmental-preferences-form input[type='checkbox']:checked").forEach((checkbox) => {
+        selectedEnvironmentalPreferences.push(checkbox.name);
+      });
+
+      // Save selected options to localStorage
+      localStorage.setItem("environmentalPreferences", JSON.stringify(selectedEnvironmentalPreferences));
+
+      // Redirect to home page for final processing
+      window.location.href = "home.html";
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutrition Preferences - EatWise</title>
+  <link rel="stylesheet" href="styles3.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <img src="imgs/Vegan.png" alt="Healthy Food">
+      <p>Your Personalized Food Health Advisor</p>
+    </nav>
+  </header>
+
+  <section id="conditions-section">
+    <div class="condition-container">
+      <form id="nutrition-form">
+
+        <h2>Choose Your Food Preferences</h2>
+        <div class="condition">
+          <label for="whole-grains">Prefer Whole Grains (e.g., Brown Rice, Quinoa)</label>
+          <input type="checkbox" id="whole-grains" name="whole-grains">
+        </div>
+        <div class="condition">
+          <label for="organic-foods">Prefer Organic Foods</label>
+          <input type="checkbox" id="organic-foods" name="organic-foods">
+        </div>
+        <div class="condition">
+          <label for="sustainable-eating">Prefer Sustainable Eating (e.g., Locally-Sourced, Seasonal Foods)</label>
+          <input type="checkbox" id="sustainable-eating" name="sustainable-eating">
+        </div>
+        <div class="condition">
+          <label for="plant-based">Prefer Plant-Based Diets (e.g., Vegan, Vegetarian)</label>
+          <input type="checkbox" id="plant-based" name="plant-based">
+        </div>
+
+        <h2>Optimize Your Nutrition</h2>
+        <div class="condition">
+          <label for="omega-3">Increase Omega-3 Fatty Acids (e.g., Flaxseeds, Salmon)</label>
+          <input type="checkbox" id="omega-3" name="omega-3">
+        </div>
+        <div class="condition">
+          <label for="fiber">Increase Fiber Intake (e.g., Beans, Whole Grains)</label>
+          <input type="checkbox" id="fiber" name="fiber">
+        </div>
+        <div class="condition">
+          <label for="potassium">Increase Potassium-Rich Foods (e.g., Bananas, Spinach)</label>
+          <input type="checkbox" id="potassium" name="potassium">
+        </div>
+        <div class="condition">
+          <label for="magnesium">Increase Magnesium-Rich Foods (e.g., Almonds, Avocados)</label>
+          <input type="checkbox" id="magnesium" name="magnesium">
+        </div>
+
+        <button type="submit" class="responsive-button">Proceed</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EatWise. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("nutrition-form").addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent page reload
+
+      let selectedNutritionPreferences = [];
+      document.querySelectorAll("#nutrition-form input[type='checkbox']:checked").forEach((checkbox) => {
+        selectedNutritionPreferences.push(checkbox.name);
+      });
+
+      // Save selected options to localStorage
+      localStorage.setItem("nutritionPreferences", JSON.stringify(selectedNutritionPreferences));
+
+      // Redirect to home page for final processing
+      window.location.href = "eco-preferences.html";
+    });
+  </script>
+</body>
+
+</html>

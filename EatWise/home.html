@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EatWise - Personalized Food Health Advisor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        function submitSearch() {
+            const name = document.getElementById('food-search').value;
+            const barcode = document.getElementById('barcode-search').value;
+
+            let query = "";
+            if (barcode) {
+                query = `barcode=${barcode}`;
+            } else if (name) {
+                query = `name=${name}`;
+            } else {
+                alert("Please enter a product name or barcode.");
+                return;
+            }
+
+            console.log("Sending query:", query);  // Debugging line
+
+            fetch(`/search?${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultsDiv = document.getElementById("results");
+                    resultsDiv.innerHTML = "";
+
+                    if (data.error) {
+                        console.error(data.error);  // Debugging line
+                        resultsDiv.innerHTML = `<p>${data.error}</p>`;
+                        return;
+                    }
+
+                    if (Array.isArray(data)) {
+                        data.forEach(product => {
+                            resultsDiv.innerHTML += formatProductHTML(product);
+                        });
+                    } else {
+                        resultsDiv.innerHTML = formatProductHTML(data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);  // Debugging line
+                });
+        }
+
+        function formatProductHTML(product) {
+            return `
+                <div class="product-container">
+                    <img src="${product.image_url}" alt="${product.name}" class="product-image">
+                    <h2>${product.name}</h2>
+                    <p><strong>Brand:</strong> ${product.brand}</p>
+                    <p><strong>Categories:</strong> ${product.categories}</p>
+                    <p><strong>Ingredients:</strong> ${product.ingredients}</p>
+                    <p><strong>Nutri Score:</strong> ${product.nutri_score}</p>
+                    <p><strong>Nova Score:</strong> ${product.nova_score}</p>
+                    <p><strong>Eco Score:</strong> ${product.ecoscore}</p>
+                    <p><strong>Allergens:</strong> ${product.allergens}</p>
+                    <p><strong>Additives:</strong> ${product.additives.join(", ")}</p>
+                    <img src="${product.image_nutrition}" alt="Nutrition" class="product-image">
+                    <img src="${product.image_ingredients}" alt="Ingredients" class="product-image">
+                </div>
+            `;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="imgs/Vegan.png" alt="Healthy Food 1">
+            <p>Your Personalized Food Health Advisor</p>
+        </nav>
+    </header>
+
+    <section id="search-section">
+        <div class="search-container">
+            <input type="text" id="food-search" placeholder="Search for a food product..." class="search-bar">
+            <input type="text" id="barcode-search" placeholder="Enter barcode..." class="search-bar">
+            <button class="submit-button" onclick="submitSearch()">Search</button>
+        </div>
+    </section>
+
+    <section id="results"></section>
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; text-align: center; }
+        .search-container { margin: 20px; }
+        .search-bar { padding: 10px; width: 250px; margin: 5px; }
+        .submit-button { padding: 10px 20px; background: green; color: white; border: none; cursor: pointer; }
+        .product-container { border: 1px solid #ddd; padding: 10px; margin: 20px; display: inline-block; width: 300px; }
+        .product-image { width: 100px; height: auto; }
+    </style>
+</body>
+</html>

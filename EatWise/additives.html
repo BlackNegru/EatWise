@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Additives - EatWise</title>
+  <link rel="stylesheet" href="styles3.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <img src="imgs/Vegan.png" alt="Healthy Food">
+      <p>Your Personalized Food Health Advisor</p>
+    </nav>
+  </header>
+
+  <section id="conditions-section">
+    <div class="condition-container">
+      <form id="additives-form">
+        
+        <h2>Avoid Harmful Additives</h2>
+        <div class="condition">
+          <label for="preservatives">Avoid Preservatives (e.g., Sodium Benzoate, Nitrates)</label>
+          <input type="checkbox" id="preservatives" name="preservatives">
+        </div>
+        <div class="condition">
+          <label for="artificial-colors">Avoid Artificial Colors (e.g., Red 40, Yellow 5)</label>
+          <input type="checkbox" id="artificial-colors" name="artificial-colors">
+        </div>
+        <div class="condition">
+          <label for="artificial-sweeteners">Avoid Artificial Sweeteners (e.g., Aspartame, Sucralose)</label>
+          <input type="checkbox" id="artificial-sweeteners" name="artificial-sweeteners">
+        </div>
+        <div class="condition">
+          <label for="msg">Avoid MSG (Monosodium Glutamate)</label>
+          <input type="checkbox" id="msg" name="msg">
+        </div>
+
+        <h2>Prefer Natural & Healthier Alternatives</h2>
+        <div class="condition">
+          <label for="non-gmo">Prefer Non-GMO Foods</label>
+          <input type="checkbox" id="non-gmo" name="non-gmo">
+        </div>
+        <div class="condition">
+          <label for="organic">Prefer Organic Foods</label>
+          <input type="checkbox" id="organic" name="organic">
+        </div>
+        <div class="condition">
+          <label for="no-trans-fats">Avoid Trans Fats (e.g., Hydrogenated Oils)</label>
+          <input type="checkbox" id="no-trans-fats" name="no-trans-fats">
+        </div>
+        <div class="condition">
+          <label for="low-sodium">Prefer Low-Sodium Options</label>
+          <input type="checkbox" id="low-sodium" name="low-sodium">
+        </div>
+
+        <button type="submit" class="responsive-button">Proceed</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EatWise. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("additives-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent page reload
+
+        let selectedAdditives = [];
+        document.querySelectorAll("#additives-form input[type='checkbox']:checked").forEach((checkbox) => {
+            selectedAdditives.push(checkbox.name);
+        });
+
+        // Save selected options to localStorage
+        localStorage.setItem("additives", JSON.stringify(selectedAdditives));
+
+        // Redirect to next page
+        window.location.href = "heart-health.html";
+    });
+  </script>
+
+</body>
+</html>

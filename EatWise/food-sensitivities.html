@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Sensitivities & Allergies - EatWise</title>
+  <link rel="stylesheet" href="styles3.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <img src="imgs/Vegan.png" alt="Healthy Food">
+      <p>Your Personalized Food Health Advisor</p>
+    </nav>
+  </header>
+
+  <section id="conditions-section">
+    <div class="condition-container">
+      <form id="food-sensitivities-form">
+        <h2>Allergies</h2>
+        <div class="condition">
+          <label for="nut-allergy">Nut Allergy</label>
+          <input type="checkbox" id="nut-allergy" name="nut-allergy">
+        </div>
+        <div class="condition">
+          <label for="gluten-allergy">Gluten Allergy</label>
+          <input type="checkbox" id="gluten-allergy" name="gluten-allergy">
+        </div>
+        <div class="condition">
+          <label for="shellfish-allergy">Shellfish Allergy</label>
+          <input type="checkbox" id="shellfish-allergy" name="shellfish-allergy">
+        </div>
+        <div class="condition">
+          <label for="egg-allergy">Egg Allergy</label>
+          <input type="checkbox" id="egg-allergy" name="egg-allergy">
+        </div>
+
+        <h2>Food Sensitivities</h2>
+        <div class="condition">
+          <label for="lactose-intolerance">Lactose Intolerance</label>
+          <input type="checkbox" id="lactose-intolerance" name="lactose-intolerance">
+        </div>
+        <div class="condition">
+          <label for="soy-intolerance">Soy Sensitivity</label>
+          <input type="checkbox" id="soy-intolerance" name="soy-intolerance">
+        </div>
+        <div class="condition">
+          <label for="histamine-intolerance">Histamine Intolerance</label>
+          <input type="checkbox" id="histamine-intolerance" name="histamine-intolerance">
+        </div>
+        <div class="condition">
+          <label for="msg-sensitivity">MSG Sensitivity</label>
+          <input type="checkbox" id="msg-sensitivity" name="msg-sensitivity">
+        </div>
+
+        <button type="submit" class="responsive-button">Proceed</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EatWise. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("food-sensitivities-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent page reload
+
+        let selectedSensitivities = [];
+        document.querySelectorAll("#food-sensitivities-form input[type='checkbox']:checked").forEach((checkbox) => {
+            selectedSensitivities.push(checkbox.name);
+        });
+
+        localStorage.setItem("foodSensitivities", JSON.stringify(selectedSensitivities));
+
+        // Redirect to next page
+        window.location.href = "additives.html";
+    });
+  </script>
+
+</body>
+</html>

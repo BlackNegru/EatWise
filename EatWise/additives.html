@@ -66,7 +66,7 @@
   </footer>
 
   <script>
-    document.getElementById("additives-form").addEventListener("submit", function(event) {
+    document.getElementById("additives-form").addEventListener("submit", async function(event) {
         event.preventDefault(); // Prevent page reload
 
         let selectedAdditives = [];
@@ -74,13 +74,20 @@
             selectedAdditives.push(checkbox.name);
         });
 
-        // Save selected options to localStorage
-        localStorage.setItem("additives", JSON.stringify(selectedAdditives));
+        // Send preferences to backend
+        await fetch("http://127.0.0.1:5000/preferences", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ additives: selectedAdditives })
+        });
 
-        // Redirect to next page
+        // Redirect to the next page
         window.location.href = "heart-health.html";
     });
   </script>
+
 
 </body>
 </html>

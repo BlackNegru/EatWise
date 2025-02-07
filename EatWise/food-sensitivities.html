@@ -65,7 +65,7 @@
   </footer>
 
   <script>
-    document.getElementById("food-sensitivities-form").addEventListener("submit", function(event) {
+    document.getElementById("food-sensitivities-form").addEventListener("submit", async function(event) {
         event.preventDefault(); // Prevent page reload
 
         let selectedSensitivities = [];
@@ -73,12 +73,20 @@
             selectedSensitivities.push(checkbox.name);
         });
 
-        localStorage.setItem("foodSensitivities", JSON.stringify(selectedSensitivities));
+        // Send preferences to backend
+        await fetch("http://127.0.0.1:5000/preferences", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ food_sensitivities: selectedSensitivities })
+        });
 
-        // Redirect to next page
+        // Redirect to the next page
         window.location.href = "additives.html";
     });
   </script>
+ 
 
 </body>
 </html>

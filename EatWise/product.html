@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eat Wise - Product Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #007bff;
+        }
+        #product-details {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: auto;
+            text-align: left;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            display: block;
+            margin: auto;
+        }
+        .section {
+            margin-top: 20px;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Details</h1>
+    <div id="product-details">
+        <h2 id="product-name"></h2>
+        <img id="product-image" src="" alt="Product Image">
+        
+        <div class="section">
+            <p><strong>Barcode:</strong> <span id="barcode"></span></p>
+            <p><strong>Brand:</strong> <span id="product-brand"></span></p>
+            <p><strong>Quantity:</strong> <span id="quantity"></span></p>
+            <p><strong>Packaging:</strong> <span id="packaging"></span></p>
+            <p><strong>Categories:</strong> <span id="product-categories"></span></p>
+        </div>
+
+        <div class="section">
+            <h3>Health & Nutrition</h3>
+            <p><strong>Nutri-Score:</strong> <span id="nutri-score"></span></p>
+            <p><strong>NOVA Score:</strong> <span id="nova-score"></span></p>
+            <p><strong>Fat:</strong> <span id="fat"></span></p>
+            <p><strong>Saturated Fat:</strong> <span id="saturated-fat"></span></p>
+            <p><strong>Sugars:</strong> <span id="sugars"></span></p>
+            <p><strong>Salt:</strong> <span id="salt"></span></p>
+        </div>
+
+        <div class="section">
+            <h3>Ingredients & Food Processing</h3>
+            <p><strong>Ingredients:</strong> <span id="product-ingredients"></span></p>
+            <p><strong>Food Processing Level:</strong> <span id="processing"></span></p>
+            <p><strong>Vegan:</strong> <span id="vegan"></span></p>
+            <p><strong>Vegetarian:</strong> <span id="vegetarian"></span></p>
+            <p><strong>Additives:</strong> <span id="additives"></span></p>
+        </div>
+
+        <div class="section">
+            <h3>Environmental Impact</h3>
+            <p><strong>Eco-Score:</strong> <span id="eco-score"></span></p>
+            <p><strong>Carbon Footprint:</strong> <span id="carbon-footprint"></span></p>
+            <p><strong>Packaging Details:</strong> <span id="packaging-details"></span></p>
+            <p><strong>Recycling Info:</strong> <span id="recycling"></span></p>
+        </div>
+
+        <a href="home.html" class="back-button">Back to Search</a>
+    </div>
+
+    <script>
+        async function fetchProductDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const barcode = params.get("barcode");
+            if (!barcode) {
+                document.getElementById("product-details").innerHTML = `<p style="color: red;">Invalid product.</p>`;
+                return;
+            }
+
+            const response = await fetch(`http://127.0.0.1:5000/product/details?barcode=${barcode}`);
+            const data = await response.json();
+
+            if (data.error) {
+                document.getElementById("product-details").innerHTML = `<p style="color: red;">Product not found.</p>`;
+                return;
+            }
+
+            document.getElementById("product-name").innerText = data.name || "N/A";
+            document.getElementById("barcode").innerText = barcode;
+            document.getElementById("product-brand").innerText = data.brand || "N/A";
+            document.getElementById("quantity").innerText = data.quantity || "N/A";
+            document.getElementById("packaging").innerText = data.packaging || "N/A";
+            document.getElementById("product-categories").innerText = data.categories || "N/A";
+
+            document.getElementById("nutri-score").innerText = data.nutri_score || "N/A";
+            document.getElementById("nova-score").innerText = data.nova_score || "N/A";
+            document.getElementById("fat").innerText = data.nutrients.fat || "N/A";
+            document.getElementById("saturated-fat").innerText = data.nutrients["saturated-fat"] || "N/A";
+            document.getElementById("sugars").innerText = data.nutrients.sugars || "N/A";
+            document.getElementById("salt").innerText = data.nutrients.salt || "N/A";
+
+            document.getElementById("product-ingredients").innerText = data.ingredients || "N/A";
+            document.getElementById("processing").innerText = data.processing || "N/A";
+            document.getElementById("vegan").innerText = data.vegan ? "Yes" : "No";
+            document.getElementById("vegetarian").innerText = data.vegetarian ? "Yes" : "No";
+            document.getElementById("additives").innerText = data.additives.join(", ") || "N/A";
+
+            document.getElementById("eco-score").innerText = data.eco_score || "N/A";
+            document.getElementById("carbon-footprint").innerText = data.carbon_footprint || "N/A";
+            document.getElementById("packaging-details").innerText = data.packaging_details || "N/A";
+            document.getElementById("recycling").innerText = data.recycling || "N/A";
+
+            document.getElementById("product-image").src = data.image_url || "https://via.placeholder.com/150";
+        }
+
+        fetchProductDetails();
+    </script>
+</body>
+</html>

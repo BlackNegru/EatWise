@@ -66,21 +66,28 @@
   </footer>
 
   <script>
-    document.getElementById("environmental-preferences-form").addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent page reload
-
-      let selectedEnvironmentalPreferences = [];
-      document.querySelectorAll("#environmental-preferences-form input[type='checkbox']:checked").forEach((checkbox) => {
-        selectedEnvironmentalPreferences.push(checkbox.name);
-      });
-
-      // Save selected options to localStorage
-      localStorage.setItem("environmentalPreferences", JSON.stringify(selectedEnvironmentalPreferences));
-
-      // Redirect to home page for final processing
-      window.location.href = "home.html";
+    document.getElementById("environmental-preferences-form").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent page reload
+  
+        let selectedEnvironmentalPreferences = [];
+        document.querySelectorAll("#environmental-preferences-form input[type='checkbox']:checked").forEach((checkbox) => {
+            selectedEnvironmentalPreferences.push(checkbox.name);
+        });
+  
+        // Send preferences to backend
+        await fetch("http://127.0.0.1:5000/preferences", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ environmental: selectedEnvironmentalPreferences })
+        });
+  
+        // Redirect to home page for final processing
+        window.location.href = "home.html";
     });
   </script>
+  
 </body>
 
 </html>

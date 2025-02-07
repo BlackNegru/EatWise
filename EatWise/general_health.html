@@ -49,9 +49,8 @@
   <footer>
     <p>&copy; 2025 EatWise. All Rights Reserved.</p>
   </footer>
-
   <script>
-    document.getElementById("general-health-form").addEventListener("submit", function(event) {
+    document.getElementById("general-health-form").addEventListener("submit", async function(event) {
         event.preventDefault(); // Prevent page reload
 
         let selectedConditions = [];
@@ -59,12 +58,20 @@
             selectedConditions.push(checkbox.name);
         });
 
-        localStorage.setItem("generalHealthConditions", JSON.stringify(selectedConditions));
+        // Send preferences to backend
+        await fetch("http://127.0.0.1:5000/preferences", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ general_health: selectedConditions })
+        });
 
-        // Redirect to next page
+        // Redirect to the next page
         window.location.href = "food-sensitivities.html";
     });
   </script>
+
 
 </body>
 </html>

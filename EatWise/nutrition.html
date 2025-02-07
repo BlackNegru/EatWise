@@ -66,21 +66,28 @@
   </footer>
 
   <script>
-    document.getElementById("nutrition-form").addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent page reload
-
-      let selectedNutritionPreferences = [];
-      document.querySelectorAll("#nutrition-form input[type='checkbox']:checked").forEach((checkbox) => {
-        selectedNutritionPreferences.push(checkbox.name);
-      });
-
-      // Save selected options to localStorage
-      localStorage.setItem("nutritionPreferences", JSON.stringify(selectedNutritionPreferences));
-
-      // Redirect to home page for final processing
-      window.location.href = "eco-preferences.html";
+    document.getElementById("nutrition-form").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent page reload
+  
+        let selectedNutritionPreferences = [];
+        document.querySelectorAll("#nutrition-form input[type='checkbox']:checked").forEach((checkbox) => {
+            selectedNutritionPreferences.push(checkbox.name);
+        });
+  
+        // Send preferences to backend
+        await fetch("http://127.0.0.1:5000/preferences", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ nutrition: selectedNutritionPreferences })
+        });
+  
+        // Redirect to the next page
+        window.location.href = "eco-preferences.html";
     });
   </script>
+  
 </body>
 
 </html>

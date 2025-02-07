@@ -58,21 +58,28 @@
   </footer>
 
   <script>
-    document.getElementById("heart-health-form").addEventListener("submit", function (event) {
+    document.getElementById("heart-health-form").addEventListener("submit", async function (event) {
         event.preventDefault(); // Prevent page reload
-
+  
         let selectedHeartHealth = [];
         document.querySelectorAll("#heart-health-form input[type='checkbox']:checked").forEach((checkbox) => {
             selectedHeartHealth.push(checkbox.name);
         });
-
-        // Save selected options to localStorage
-        localStorage.setItem("heartHealth", JSON.stringify(selectedHeartHealth));
-
-        // Redirect to next page
+  
+        // Send preferences to backend
+        await fetch("http://127.0.0.1:5000/preferences", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ heart_health: selectedHeartHealth })
+        });
+  
+        // Redirect to the next page
         window.location.href = "nutrition.html";
     });
   </script>
+  
 </body>
 
 </html>
